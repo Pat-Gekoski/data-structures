@@ -25,14 +25,14 @@ export class Queue<T = any> {
 			this.first = newNode
 			this.last = newNode
 		} else {
-			this.last.next = newNode
+			this.last!.next = newNode
 			this.last = newNode
 		}
 
 		return ++this.size
 	}
 
-	public dequeue(): T {
+	public dequeue(): T | null {
 		if (!this.first) return null
 		const temp = this.first
 		if (this.first === this.last) {

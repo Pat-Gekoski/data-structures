@@ -25,15 +25,15 @@ export class SinglyLinkedList<T = any> {
 			this.head = newNode
 			this.tail = this.head
 		} else {
-			this.tail.next = newNode
+			this.tail!.next = newNode
 			this.tail = newNode
 		}
 		this.length++
 		return this
 	}
 
-	public pop(): Node<T> | undefined {
-		if (!this.head) return
+	public pop(): Node<T> | null {
+		if (!this.head) return null
 
 		if (this.head === this.tail) {
 			const poppedNode = this.head
@@ -55,8 +55,8 @@ export class SinglyLinkedList<T = any> {
 		return poppedNode
 	}
 
-	public shift(): Node<T> | undefined {
-		if (!this.head) return
+	public shift(): Node<T> | null {
+		if (!this.head) return null
 		const current = this.head
 		this.head = current.next
 		if (!this.head) {
@@ -79,14 +79,14 @@ export class SinglyLinkedList<T = any> {
 		return newNode
 	}
 
-	public get(index: number): Node<T> | undefined {
-		if (index < 0 || index >= this.length) return undefined
+	public get(index: number): Node<T> | null {
+		if (index < 0 || index >= this.length) return null
 
 		let current = this.head
 		let position = 0
 
 		while (position !== index) {
-			if (!current) return undefined
+			if (!current) return null
 			current = current.next
 			position++
 		}
@@ -117,12 +117,12 @@ export class SinglyLinkedList<T = any> {
 		return true
 	}
 
-	public remove(index: number): Node<T> | undefined {
-		if (index < 0 || index >= this.length) return undefined
+	public remove(index: number): Node<T> | null | undefined {
+		if (index < 0 || index >= this.length) return null
 		if (index === this.length - 1) return this.pop()
 		if (index === 0) return this.shift()
 		const prev = this.get(index - 1)
-		if (prev) {
+		if (prev && prev.next) {
 			const removedNode = prev.next
 			prev.next = removedNode.next
 			this.length--
@@ -135,7 +135,7 @@ export class SinglyLinkedList<T = any> {
 		this.head = this.tail
 		this.tail = node
 
-		let prev = null
+		let prev: Node<T> | null = null
 
 		while (node !== null) {
 			const nextNode = node.next

@@ -27,7 +27,7 @@ export class DoublyLinkedList<T = any> {
 			this.head = node
 			this.tail = node
 		} else {
-			this.tail.next = node
+			this.tail!.next = node
 			node.prev = this.tail
 			this.tail = node
 		}
@@ -36,8 +36,8 @@ export class DoublyLinkedList<T = any> {
 		return this
 	}
 
-	public pop(): Node<T> | undefined {
-		if (!this.head) return
+	public pop(): Node<T> | null {
+		if (!this.head) return null
 
 		const node = this.tail
 
@@ -45,17 +45,17 @@ export class DoublyLinkedList<T = any> {
 			this.head = null
 			this.tail = null
 		} else {
-			this.tail = node.prev
-			this.tail.next = null
-			node.prev = null
+			this.tail = node!.prev
+			this.tail!.next = null
+			node!.prev = null
 		}
 
 		this.length--
 		return node
 	}
 
-	public shift(): Node<T> | undefined {
-		if (!this.head) return
+	public shift(): Node<T> | null {
+		if (!this.head) return null
 
 		const node = this.head
 
@@ -64,7 +64,7 @@ export class DoublyLinkedList<T = any> {
 			this.tail = null
 		} else {
 			this.head = node.next
-			this.head.prev = null
+			this.head!.prev = null
 			node.next = null
 		}
 
@@ -72,7 +72,7 @@ export class DoublyLinkedList<T = any> {
 		return node
 	}
 
-	public unshift(value: T): Node<T> | undefined {
+	public unshift(value: T): Node<T> {
 		const node = new Node(value)
 
 		if (!this.head) {
@@ -88,25 +88,25 @@ export class DoublyLinkedList<T = any> {
 		return node
 	}
 
-	public get(index: number): Node<T> | undefined {
-		if (index < 0 || index >= this.length) return undefined
+	public get(index: number): Node<T> | null {
+		if (index < 0 || index >= this.length) return null
 
-		const mid = this.length / 2
+		const mid = Math.floor(this.length / 2)
 		let position: number
-		let current: Node<T>
+		let current: Node<T> | null
 
 		if (index <= mid) {
 			position = 0
 			current = this.head
-			while (position !== index) {
+			while (current && position !== index) {
 				current = current.next
 				position++
 			}
 		} else {
 			position = this.length - 1
 			current = this.tail
-			while (position !== index) {
-				current = current.prev
+			while (current && position !== index) {
+				current = current!.prev
 				position--
 			}
 		}
@@ -131,21 +131,21 @@ export class DoublyLinkedList<T = any> {
 		const prevNode = this.get(index - 1)
 		if (!prevNode) return false
 		newNode.next = prevNode.next
-		newNode.next.prev = newNode
+		newNode.next!.prev = newNode
 		prevNode.next = newNode
 		newNode.prev = prevNode
 		this.length++
 		return true
 	}
 
-	public remove(index: number): Node<T> | undefined {
-		if (index < 0 || index >= this.length) return undefined
+	public remove(index: number): Node<T> | null | undefined {
+		if (index < 0 || index >= this.length) return null
 		if (index === this.length - 1) return this.pop()
 		if (index === 0) return this.shift()
 		const node = this.get(index)
 		if (node) {
-			node.prev.next = node.next
-			node.next.prev = node.prev
+			node.prev!.next = node.next
+			node.next!.prev = node.prev
 			node.next = null
 			node.prev = null
 			this.length--

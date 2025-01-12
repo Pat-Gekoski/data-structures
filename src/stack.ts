@@ -32,7 +32,7 @@ export class Stack<T = any> {
 		return ++this.size
 	}
 
-	public pop(): T {
+	public pop(): T | null {
 		if (!this.first) return null
 		const temp = this.first
 		if (this.first === this.last) {

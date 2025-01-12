@@ -1,5 +1,5 @@
 {
-	"name": "pg-data-structures",
+	"name": "@pat-gekoski/data-structures",
 	"version": "1.0.0",
 	"description": "A collection of TypeScript data structures",
 	"main": "dist/cjs/index.js",
@@ -20,6 +20,10 @@
 		"build": "npm run build:cjs && npm run build:esm",
 		"prepublishOnly": "npm run build"
 	},
+	"repository": {
+		"type": "git",
+		"url": "https://github.com/pat-gekoski/data-structures.git"
+	},
 	"author": "Patric Gekoski",
 	"keywords": [
 		"typescript",
@@ -27,5 +31,8 @@
 		"data-structures",
 		"npm"
 	],
-	"license": "MIT"
+	"license": "MIT",
+	"devDependencies": {
+		"ts-node": "^10.9.2"
+	}
 }

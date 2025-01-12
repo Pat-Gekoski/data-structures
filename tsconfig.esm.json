@@ -5,6 +5,7 @@
 		"outDir": "./dist/esm",
 		"declaration": true,
 		"declarationMap": false,
+		"emitDeclarationOnly": false,
 		"strict": true,
 		"esModuleInterop": true,
 		"skipLibCheck": true

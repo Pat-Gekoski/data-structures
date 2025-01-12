@@ -1,5 +1,5 @@
 {
-	"name": "pg-data-structures",
+	"name": "@pat-gekoski/data-structures",
 	"version": "1.0.0",
 	"description": "A collection of TypeScript data structures",
 	"main": "dist/cjs/index.js",
@@ -27,5 +27,8 @@
 		"data-structures",
 		"npm"
 	],
-	"license": "MIT"
+	"license": "MIT",
+	"devDependencies": {
+		"ts-node": "^10.9.2"
+	}
 }

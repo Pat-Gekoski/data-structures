@@ -7,7 +7,7 @@ declare class Node<T = any> {
 export declare class BinarySearchTree<T = any> {
     root: Node<T> | null;
     constructor();
-    insert(value: T): BinarySearchTree<T>;
-    has(value: T): boolean;
+    insert(value: T): BinarySearchTree<T> | undefined;
+    has(value: T): Node<T> | null;
 }
 export {};

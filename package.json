@@ -8,13 +8,15 @@
 	"exports": {
 		".": {
 			"require": "./dist/cjs/index.js",
-			"import": "./dist/esm/index.js"
+			"import": "./dist/esm/index.js",
+			"types": "./dist/esm/index.d.ts"
 		}
 	},
 	"files": [
 		"dist/**/*"
 	],
 	"scripts": {
+		"dev": "nodemon --watch src --ext ts --exec \"ts-node --project tsconfig.dev.json\" ./src/index.ts",
 		"build:cjs": "tsc --project tsconfig.cjs.json",
 		"build:esm": "tsc --project tsconfig.esm.json",
 		"build": "npm run build:cjs && npm run build:esm",
@@ -36,6 +38,7 @@
 	],
 	"license": "MIT",
 	"devDependencies": {
-		"ts-node": "^10.9.2"
+		"ts-node": "^10.9.2",
+		"typescript": "^5.7.3"
 	}
 }
